@@ -1,5 +1,5 @@
 # Fatoração LU
-Programa em Python para resolver **m** sistemas de **n** incógnitas pelo método da fatoração LU.
+Programa em Python para resolver **m** sistemas de **n** incógnitas pelo método da fatoração LU. Programa desenvolvido para o trabalho da disciplina de Métodos Numéricos do curso de Ciência da Computação da Universidade Federal Fluminense, durante o segundo semestre de 2019.
 
 ### Descrição do trabalho:
    Implementar um programa em linguagem de programação para resolver **m** sistemas de **n**
