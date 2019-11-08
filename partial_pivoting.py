@@ -1,16 +1,12 @@
-############################partialPivoting(a,b)###############################
-# Esta função tem como objetivo realizar o pivoteamento parcial de uma matriz #
-# quadrada de ordem n.                                                        #
-# Parâmetros:                                                                 #
-#    a: matriz de coeficientes (ax + b)                                       #
-#                               ^                                             #
-#    b: matriz de segundo membro (ax + b)                                     #
-#                                      ^                                      #
-# A função retorna a matriz 'a' após a operação de pivoteamento parcial.      #
-###############################################################################
-
-
-def partialPivoting(a,b):
+# Esta função tem como objetivo realizar o pivoteamento parcial de uma matriz
+# quadrada de ordem n.
+# Parâmetros:
+#    a: matriz de coeficientes (ax + b)
+#                               ^
+#    b: matriz de segundo membro (ax + b)
+#                                      ^ 
+# A função retorna a matriz 'a' após a operação de pivoteamento parcial.
+def partialPivoting(a):
 
     for k in range(len(a) - 1):
         #pivô começa como o primeiro elemento da primeira linha
@@ -36,10 +32,6 @@ def partialPivoting(a,b):
                     swap = a[k][j]
                     a[k][j] = a[pivot_line][j]
                     a[pivot_line][j] = swap
-
-                swap = b[k]
-                b[k] = b[pivot_line]
-                b[pivot_line] = swap
         
         #realizo operação de soma de linhas
         for i in range (k+1, len(a)):
@@ -47,9 +39,5 @@ def partialPivoting(a,b):
             a[i][k] = 0
             for j in range (k+1, len(a)):
                 a[i][j] = a[i][j] - m * a[k][j]
-            b[i] = b[i] - m * b[k]
     
-    print(a)
-    print(b)
-
-#### TODO: Fatoração LU
+    return a
