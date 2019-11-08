@@ -1,5 +1,17 @@
+############################partialPivoting(a,b)###############################
+# Esta função tem como objetivo realizar o pivoteamento parcial de uma matriz #
+# quadrada de ordem n.                                                        #
+# Parâmetros:                                                                 #
+#    a: matriz de coeficientes (ax + b)                                       #
+#                               ^                                             #
+#    b: matriz de segundo membro (ax + b)                                     #
+#                                      ^                                      #
+# A função retorna a matriz 'a' após a operação de pivoteamento parcial.      #
+###############################################################################
+
+
 def partialPivoting(a,b):
-    
+
     for k in range(len(a) - 1):
         #pivô começa como o primeiro elemento da primeira linha
         pivot = a[k][k]
