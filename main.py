@@ -44,4 +44,4 @@ testA = [[3.0, 1.0, 6.0],
     
 testB = [2.0, 7.0, 4.0]
 
-partialPivoting(testA,testB)
+partialPivoting(testA)
