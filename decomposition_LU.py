@@ -8,6 +8,7 @@ from math import fabs
 # A função, no momento, imprime a matriz U (matriz a após pivoteamento parcial)
 # e a matriz L (matriz triangular inferior criada a partir dos fatores de multiplicação
 # das linhas da matriz U).
+
 def decompositionLU(a,b):
     # Variáveis
     mList = []  # Agrupar fatores multiplicativos das linhas
@@ -39,6 +40,7 @@ def decompositionLU(a,b):
                 U[k][j] = U[pivot_line][j]
                 U[pivot_line][j] = swap
 
+            # Troca os elementos da matriz de segundo termo
             swap = b[k]
             b[k] = b[pivot_line]
             b[pivot_line] = swap
@@ -61,7 +63,7 @@ def decompositionLU(a,b):
                 line[j] = 0
         L.append(line) 
 
-    #adiciona os fatores da lista mList na matriz L
+    # Adiciona os fatores da lista mList na matriz L
     while(p < len(mList)):
         for i in range(len(L)):
             for j in range(len(mList)):
@@ -69,21 +71,18 @@ def decompositionLU(a,b):
                     L[i][j] = mList[p]
                     p = p+1
     
-    
-
+    # Resultados
     print("Matriz L:") 
-    L = truncate(L)
+    L = truncate(L,2)
     printM(L) 
     print("") 
     print("Matriz U:")        
-    U = truncate(U)
+    U = truncate(U,2)
     printM(U)
     print("") 
     print("Matriz b:")
     print(b)
 
-
-###########FUNÇÕES AUXILIARES############
 # Função auxiliar para geração de uma lista de zeros de tamamho N
 def newLine(n):
     line = []
@@ -96,8 +95,9 @@ def printM(m):
     for i in range(len(m)):
         print(m[i])
 
-def truncate(m):
+# Função auxiliar para arredondar os elementos da matriz m em até n casas decimais
+def truncate(m,n):
     for i in range(len(m)):
         for j in range(len(m[i])):
-            m[i][j] = round(m[i][j],2)
+            m[i][j] = round(m[i][j],n)
     return m            
