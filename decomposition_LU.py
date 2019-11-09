@@ -3,12 +3,12 @@ from math import fabs
 # Esta função tem como objetivo realizar a fatoração LU de uma matriz
 # quadrada de ordem n.
 # Parâmetros:
-#    a: matriz de coeficientes (ax + b)
+#    a: matriz de coeficientes (ax = b)
 #   
 # A função, no momento, imprime a matriz U (matriz a após pivoteamento parcial)
 # e a matriz L (matriz triangular inferior criada a partir dos fatores de multiplicação
 # das linhas da matriz U).
-def decompositionLU(a):
+def decompositionLU(a,b):
     # Variáveis
     mList = []  # Agrupar fatores multiplicativos das linhas
     L = []      # Matriz L    
@@ -38,7 +38,11 @@ def decompositionLU(a):
                 swap = U[k][j]
                 U[k][j] = U[pivot_line][j]
                 U[pivot_line][j] = swap
-        
+
+            swap = b[k]
+            b[k] = b[pivot_line]
+            b[pivot_line] = swap
+
         # Realizo operação de soma de linhas
         for i in range (k+1, len(U)):
             m = U[i][k] / U[k][k]
@@ -65,13 +69,18 @@ def decompositionLU(a):
                     L[i][j] = mList[p]
                     p = p+1
     
+    
+
     print("Matriz L:") 
     L = truncate(L)
     printM(L) 
     print("") 
     print("Matriz U:")        
     U = truncate(U)
-    printM(U) 
+    printM(U)
+    print("") 
+    print("Matriz b:")
+    print(b)
 
 
 ###########FUNÇÕES AUXILIARES############
