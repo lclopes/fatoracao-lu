@@ -43,6 +43,7 @@ testA = [[6.0, 7.0, 4.0],
          [4.0, 4.0, 3.0],
          [2.0, 1.0, 1.0]]
     
+#caso de teste: Exercício 11 da lista de resolução de sistemas lineares
 testB = [3.0, 6.0, -16.0, 18.0]
 
 testC = [[3.0, 2.0, 0.0, 1.0],
