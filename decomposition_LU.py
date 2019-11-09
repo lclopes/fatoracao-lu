@@ -6,7 +6,7 @@
 #    b: matriz de segundo membro (ax + b)
 #                                      ^ 
 # A função retorna a matriz 'a' após a operação de pivoteamento parcial.
-def partialPivoting(a):
+def decompositionLU(a):
     mList = []
     L = []
     U = a

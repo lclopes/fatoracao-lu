@@ -1,4 +1,4 @@
-from partial_pivoting import partialPivoting
+from decomposition_LU import decompositionLU
 
 # Os dados de entrada do programa são: n (# incógnitas), m (# sistemas), os elementos da matriz dos coeficientes dos sistemas e os elementos da matriz segundo membro dos sistemas. Estes dados deverão ser lidos de um arquivo denominado SISTEMA.
 
@@ -44,4 +44,4 @@ testA = [[3.0, 1.0, 6.0],
     
 testB = [2.0, 7.0, 4.0]
 
-partialPivoting(testA)
+decompositionLU(testA)
