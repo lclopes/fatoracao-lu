@@ -38,10 +38,15 @@ for i in range(n+3, n+3+m):
 #print(A, b_list, n, m)
 
 #caso de teste: Exercício 2 da lista de resolução de sistemas lineares
-testA = [[3.0, 1.0, 6.0],
-         [2.0, 1.0, 3.0],
-         [1.0, 1.0, 1.0]]
+testA = [[6.0, 7.0, 4.0],
+         [4.0, 4.0, 3.0],
+         [2.0, 1.0, 1.0]]
     
 testB = [2.0, 7.0, 4.0]
 
-decompositionLU(testA)
+testC = [[3.0, 2.0, 0.0, 1.0],
+         [9.0, 8.0, -3.0, 4.0],
+         [-6.0, 4.0, -8.0, 0.0],
+			[3.0, -8.0, 3.0, -4.0]]
+
+decompositionLU(testC)

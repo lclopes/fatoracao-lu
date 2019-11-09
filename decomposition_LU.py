@@ -1,3 +1,9 @@
+from math import fabs
+
+def printM(m):
+    for i in range(len(m)):
+        print(m[i])
+
 # Esta função tem como objetivo realizar o pivoteamento parcial de uma matriz
 # quadrada de ordem n.
 # Parâmetros:
@@ -20,30 +26,30 @@ def decompositionLU(a):
 
         for i in range(k+1, len(U)):
             #verifico se o pivô é o maior elemento da coluna
-            if U[i][k] > pivot:
+            if fabs(U[i][k]) > fabs(pivot):
                 pivot = U[i][k]
                 pivot_line = i
         
         #se o pivô for 0: saímos da iteração
         if pivot == 0:
             break
-        else:
-
-            #se a linha do pivô não for a linha atual: troco as linhas
-            if pivot_line != k:
-                for j in range (len(U)):
-                    swap = U[k][j]
-                    U[k][j] = U[pivot_line][j]
-                    U[pivot_line][j] = swap
+        
+        #se a linha do pivô não for a linha atual: troco as linhas
+        if pivot_line != k:
+            for j in range (len(U)):
+                swap = U[k][j]
+                U[k][j] = U[pivot_line][j]
+                U[pivot_line][j] = swap
         
         #realizo operação de soma de linhas
         for i in range (k+1, len(U)):
             m = U[i][k] / U[k][k]
             U[i][k] = 0
-            mList.append(m)
+            
             for j in range (k+1, len(U)):
-                U[i][j] = U[i][j] - m * U[k][j]
-                
+                U[i][j] = U[i][j] - (m * U[k][j])
+            mList.append(m)
+
     #geração da matriz L
     for i in range (len(U)):
         linha = newLine(len(U))
@@ -57,7 +63,9 @@ def decompositionLU(a):
         L.append(linha) 
     
     print(mList)
-    print(U) 
+    print("")
+    printM(U)
+    print("") 
     print(L) 
 
 def newLine(n):
