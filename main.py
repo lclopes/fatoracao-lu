@@ -1,4 +1,5 @@
 from decomposition_LU import decompositionLU
+from decomposition_LU import truncate
 
 # Os dados de entrada do programa são: n (# incógnitas), m (# sistemas), os elementos da matriz dos coeficientes dos sistemas e os elementos da matriz segundo membro dos sistemas. Estes dados deverão ser lidos de um arquivo denominado SISTEMA.
 

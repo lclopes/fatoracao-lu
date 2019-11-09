@@ -1,75 +1,94 @@
 from math import fabs
 
-def printM(m):
-    for i in range(len(m)):
-        print(m[i])
-
-# Esta função tem como objetivo realizar o pivoteamento parcial de uma matriz
+# Esta função tem como objetivo realizar a fatoração LU de uma matriz
 # quadrada de ordem n.
 # Parâmetros:
 #    a: matriz de coeficientes (ax + b)
-#                               ^
-#    b: matriz de segundo membro (ax + b)
-#                                      ^ 
-# A função retorna a matriz 'a' após a operação de pivoteamento parcial.
+#   
+# A função, no momento, imprime a matriz U (matriz a após pivoteamento parcial)
+# e a matriz L (matriz triangular inferior criada a partir dos fatores de multiplicação
+# das linhas da matriz U).
 def decompositionLU(a):
-    mList = []
-    L = []
-    U = a
+    # Variáveis
+    mList = []  # Agrupar fatores multiplicativos das linhas
+    L = []      # Matriz L    
+    U = a       # Matriz U
+    p = 0       # Ponteiro para percorrimento da lista de fatores mList
 
     for k in range(len(U) - 1):
-        #pivô começa como o primeiro elemento da primeira linha
+        # Pivô começa como o primeiro elemento da primeira linha
         pivot = U[k][k]
 
-        #salvo a linha do pivo para realizar a operação de troca
+        # Salvo a linha do pivo para realizar a operação de troca
         pivot_line = k
 
         for i in range(k+1, len(U)):
-            #verifico se o pivô é o maior elemento da coluna
+            # Verifico se o pivô é o maior elemento da coluna
             if fabs(U[i][k]) > fabs(pivot):
                 pivot = U[i][k]
                 pivot_line = i
         
-        #se o pivô for 0: saímos da iteração
+        # Se o pivô for 0: saímos da iteração
         if pivot == 0:
             break
         
-        #se a linha do pivô não for a linha atual: troco as linhas
+        # Se a linha do pivô não for a linha atual: troco as linhas
         if pivot_line != k:
             for j in range (len(U)):
                 swap = U[k][j]
                 U[k][j] = U[pivot_line][j]
                 U[pivot_line][j] = swap
         
-        #realizo operação de soma de linhas
+        # Realizo operação de soma de linhas
         for i in range (k+1, len(U)):
             m = U[i][k] / U[k][k]
             U[i][k] = 0
-            
+            mList.append(m)     # Salva o fator na lista para operação posterior
             for j in range (k+1, len(U)):
                 U[i][j] = U[i][j] - (m * U[k][j])
-            mList.append(m)
-
-    #geração da matriz L
+              
+    # Geração da matriz L: gera uma matriz identidade de ordem n
     for i in range (len(U)):
-        linha = newLine(len(U))
+        line = newLine(len(U))
         for j in range (len(U[i])):
             if i == j:
-                linha[j] = 1
+                line[j] = 1
             elif i < j:
-                linha[j] = 0
-            else:
-                linha[j] = mList[j]
-        L.append(linha) 
-    
-    print(mList)
-    print("")
-    printM(U)
-    print("") 
-    print(L) 
+                line[j] = 0
+        L.append(line) 
 
+    #adiciona os fatores da lista mList na matriz L
+    while(p < len(mList)):
+        for i in range(len(L)):
+            for j in range(len(mList)):
+                if(i > j):
+                    L[i][j] = mList[p]
+                    p = p+1
+    
+    print("Matriz L:") 
+    L = truncate(L)
+    printM(L) 
+    print("") 
+    print("Matriz U:")        
+    U = truncate(U)
+    printM(U) 
+
+
+###########FUNÇÕES AUXILIARES############
+# Função auxiliar para geração de uma lista de zeros de tamamho N
 def newLine(n):
     line = []
     for i in range(n):
         line.append(0)
     return line    
+
+# Função auxiliar para imprimir a matriz de forma mais legível
+def printM(m):
+    for i in range(len(m)):
+        print(m[i])
+
+def truncate(m):
+    for i in range(len(m)):
+        for j in range(len(m[i])):
+            m[i][j] = round(m[i][j],2)
+    return m            
