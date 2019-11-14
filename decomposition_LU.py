@@ -1,13 +1,20 @@
 from math import fabs
 
-# Esta função tem como objetivo realizar a fatoração LU de uma matriz
-# quadrada de ordem n.
+# Esta função tem como objetivo realizar a fatoração LU de uma m matrizes
+# quadradas de ordem n.
 # Parâmetros:
+#
+#    m: número de sistemas
+#
+#    n: número de equações/variáveis 
+#
 #    a: matriz de coeficientes (ax = b)
-#   
-# A função, no momento, imprime a matriz U (matriz a após pivoteamento parcial)
-# e a matriz L (matriz triangular inferior criada a partir dos fatores de multiplicação
-# das linhas da matriz U).
+#                               ^
+#    b: matriz de segundo termo (ax = b) 
+#                                     ^  
+# A função, no momento, imprime a matriz U (matriz a após pivoteamento parcial),
+# a matriz L (matriz triangular inferior criada a partir dos fatores de multiplicação
+# das linhas da matriz U) e a matriz b após uma possível troca de linhas ser efetuada.
 
 def decompositionLU(a,b):
     # Variáveis
@@ -59,8 +66,6 @@ def decompositionLU(a,b):
         for j in range (len(U[i])):
             if i == j:
                 line[j] = 1
-            elif i < j:
-                line[j] = 0
         L.append(line) 
 
     # Adiciona os fatores da lista mList na matriz L
@@ -70,7 +75,7 @@ def decompositionLU(a,b):
                 if(i > j):
                     L[i][j] = mList[p]
                     p = p+1
-    
+
     # Resultados
     print("Matriz L:") 
     L = truncate(L,2)
@@ -82,6 +87,11 @@ def decompositionLU(a,b):
     print("") 
     print("Matriz b:")
     print(b)
+
+#    z = [6.0, 16.0, 2.0, (3/13)]
+#    print("")
+#    print("Matriz b:")
+#    printM(multMat(L,z))
 
 # Função auxiliar para geração de uma lista de zeros de tamamho N
 def newLine(n):
