@@ -1,4 +1,6 @@
 from decomposition_LU import decompositionLU
+from decomposition_LU import multiplyM
+from decomposition_LU import printM
 
 # Os dados de entrada do programa são: n (# incógnitas), m (# sistemas), os elementos da matriz dos coeficientes dos sistemas e os elementos da matriz segundo membro dos sistemas. Estes dados deverão ser lidos de um arquivo denominado SISTEMA.
 
@@ -48,6 +50,26 @@ testB = [3.0, 6.0, -16.0, 18.0]
 testC = [[3.0, 2.0, 0.0, 1.0],
          [9.0, 8.0, -3.0, 4.0],
          [-6.0, 4.0, -8.0, 0.0],
-			[3.0, -8.0, 3.0, -4.0]]
+         [3.0, -8.0, 3.0, -4.0]]
 
-decompositionLU(testC,testB)
+testD = [
+    [2, 1, 1, 0],
+    [4, 3, 3, 1],
+    [8, 7, 9, 5],
+    [6, 7, 9, 8]
+]
+
+#decompositionLU(testD,testB)
+
+mA = [
+    [3, 1],
+    [2, -1],
+    [0, 4]
+]
+
+mB = [
+    [1, -1, 2],
+    [3, 0, 5]
+]
+
+printM(multiplyM(mA, mB))
