@@ -83,6 +83,19 @@ def decompositionLU(a,b):
     print("Matriz b:")
     print(b)
 
+def multiplyM(a, b):
+    n = len(a[0])
+    rows = len(a)
+    cols = len(b[0])
+    c = []
+    for i in range(rows):
+        c.append(newLine(cols))
+        for j in range(cols):
+            for k in range(n):
+                c[i][j] = c[i][j] + a[i][k] * b[k][j]
+    return c
+            
+    
 # Função auxiliar para geração de uma lista de zeros de tamamho N
 def newLine(n):
     line = []
