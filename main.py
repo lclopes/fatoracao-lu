@@ -59,7 +59,7 @@ testD = [
     [6, 7, 9, 8]
 ]
 
-#decompositionLU(testD,testB)
+decompositionLU(testD,testB)
 
 mA = [
     [3, 1],

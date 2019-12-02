@@ -21,7 +21,14 @@ def decompositionLU(a,b):
     mList = []  # Agrupar fatores multiplicativos das linhas
     L = []      # Matriz L    
     U = a       # Matriz U
-    p = 0       # Ponteiro para percorrimento da lista de fatores mList
+
+    # Geração da matriz L: gera uma matriz identidade de ordem n que será preenchida posteriormente
+    for i in range (len(U)):
+        line = newLine(len(U))
+        for j in range (len(U[i])):
+            if i == j:
+                line[j] = 1
+        L.append(line)
 
     for k in range(len(U) - 1):
         # Pivô começa como o primeiro elemento da primeira linha
@@ -56,26 +63,11 @@ def decompositionLU(a,b):
         for i in range (k+1, len(U)):
             m = U[i][k] / U[k][k]
             U[i][k] = 0
-            mList.append(m)     # Salva o fator na lista para operação posterior
+            if i > k:
+                L[i][k] = m
             for j in range (k+1, len(U)):
-                U[i][j] = U[i][j] - (m * U[k][j])
-              
-    # Geração da matriz L: gera uma matriz identidade de ordem n
-    for i in range (len(U)):
-        line = newLine(len(U))
-        for j in range (len(U[i])):
-            if i == j:
-                line[j] = 1
-        L.append(line) 
-
-    # Adiciona os fatores da lista mList na matriz L
-    while(p < len(mList)):
-        for i in range(len(L)):
-            for j in range(len(mList)):
-                if(i > j):
-                    L[i][j] = mList[p]
-                    p = p+1
-
+                U[i][j] = U[i][j] - (m * U[k][j])    
+                
     # Resultados
     print("Matriz L:") 
     L = truncate(L,2)
