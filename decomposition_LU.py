@@ -1,4 +1,5 @@
 from math import fabs
+from matrix import newLine
 
 # Esta função tem como objetivo realizar a fatoração LU de uma m matrizes
 # quadradas de ordem n.
@@ -16,10 +17,11 @@ from math import fabs
 # a matriz L (matriz triangular inferior criada a partir dos fatores de multiplicação
 # das linhas da matriz U) e a matriz b após uma possível troca de linhas ser efetuada.
 
-def decompositionLU(a,b):
+def decompositionLU(a, b_list):
     # Variáveis
     L = []      # Matriz L    
     U = a       # Matriz U
+    P = 1
 
     # Geração da matriz L: gera uma matriz identidade de ordem n que será preenchida posteriormente
     for i in range (len(U)):
@@ -52,11 +54,13 @@ def decompositionLU(a,b):
                 swap = U[k][j]
                 U[k][j] = U[pivot_line][j]
                 U[pivot_line][j] = swap
+                P = P * (-1)
 
             # Troca os elementos da matriz de segundo termo
-            swap = b[k]
-            b[k] = b[pivot_line]
-            b[pivot_line] = swap
+            for b in b_list:
+                swap = b[k]
+                b[k] = b[pivot_line]
+                b[pivot_line] = swap
 
         # Realiza pivoteamento parcial              
         partialPivoting(U,k)
@@ -67,60 +71,20 @@ def decompositionLU(a,b):
             mij = U[row][col]
             L[row][col] = mij
             U[row][col] = 0
-         
-    # Resultados
-    print("Matriz L:") 
-    L = truncate(L,2)
-    printM(L) 
-    print("") 
-    print("Matriz U:")        
-    U = truncate(U,2)
-    printM(U)
-    print("") 
-    print("Matriz b:")
-    print(b)
+             
+    return L, U, P, b_list
 
-# Função para multiplicar duas matrizes
-def multiplyM(a, b):
-    n = len(a[0])
-    rows = len(a)
-    cols = len(b[0])
-    c = []
-    for i in range(rows):
-        c.append(newLine(cols))
-        for j in range(cols):
-            for k in range(n):
-                c[i][j] = c[i][j] + a[i][k] * b[k][j]
-    return c
+# Função de pivoteamento parcial     
+def partialPivoting(m, i):
 
-# Função para realizar pivoteamento parcial (MODIFICAR)        
-def partialPivoting(matriz, i):
-    N = len(matriz)  # Ordem da Matriz
+    if(i != len(m)-1):
+        divisor = m[i][i]
 
-    if(i != len(matriz)-1):
-        den = matriz[i][i]
-
-        for row in range(i+1, N):
-            num = matriz[row][i]
-
-            for col in range(i, N):
-                matriz[row][col] -= (num / den) * matriz[i][col]
-
-            # Constrói a matriz L
-            matriz[row][i] = num / den
-
-    
-# Função auxiliar para geração de uma lista de zeros de tamamho N
-def newLine(n):
-    line = []
-    for i in range(n):
-        line.append(0)
-    return line    
-
-# Função auxiliar para imprimir a matriz de forma mais legível
-def printM(m):
-    for i in range(len(m)):
-        print(m[i])
+        for row in range(i+1, len(m)):
+            n = m[row][i]
+            for col in range(i, len(m)):
+                m[row][col] -= (n / divisor) * m[i][col]
+            m[row][i] = n / divisor
 
 # Função auxiliar para arredondar os elementos da matriz m em até n casas decimais
 def truncate(m,n):
