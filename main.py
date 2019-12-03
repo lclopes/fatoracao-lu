@@ -72,4 +72,4 @@ mB = [
     [3, 0, 5]
 ]
 
-printM(multiplyM(mA, mB))
+# printM(multiplyM(mA, mB))

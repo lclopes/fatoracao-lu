@@ -18,7 +18,6 @@ from math import fabs
 
 def decompositionLU(a,b):
     # Variáveis
-    mList = []  # Agrupar fatores multiplicativos das linhas
     L = []      # Matriz L    
     U = a       # Matriz U
 
@@ -59,15 +58,16 @@ def decompositionLU(a,b):
             b[k] = b[pivot_line]
             b[pivot_line] = swap
 
-        # Realizo operação de soma de linhas
-        for i in range (k+1, len(U)):
-            m = U[i][k] / U[k][k]
-            U[i][k] = 0
-            if i > k:
-                L[i][k] = m
-            for j in range (k+1, len(U)):
-                U[i][j] = U[i][j] - (m * U[k][j])    
-                
+        # Realiza pivoteamento parcial              
+        partialPivoting(U,k)
+
+    # Gera a matriz L (MODIFICAR)
+    for coluna in range(0, len(U)):
+        for linha in range(coluna+1, len(U)):
+            L[linha][coluna] = U[linha][coluna] # Matriz L
+            U[linha][coluna] = 0     
+
+    # return U, L, b, permut, cont           
     # Resultados
     print("Matriz L:") 
     L = truncate(L,2)
@@ -80,6 +80,7 @@ def decompositionLU(a,b):
     print("Matriz b:")
     print(b)
 
+# Função para multiplicar duas matrizes
 def multiplyM(a, b):
     n = len(a[0])
     rows = len(a)
@@ -91,7 +92,23 @@ def multiplyM(a, b):
             for k in range(n):
                 c[i][j] = c[i][j] + a[i][k] * b[k][j]
     return c
-            
+
+# Função para realizar pivoteamento parcial (MODIFICAR)        
+def partialPivoting(matriz, i):
+    N = len(matriz)  # Ordem da Matriz
+
+    if(i != len(matriz)-1):
+        den = matriz[i][i]
+
+        for linha in range(i+1, N):
+            num = matriz[linha][i]
+
+            for coluna in range(i, N):
+                matriz[linha][coluna] -= (num / den) * matriz[i][coluna]
+
+            # Constrói a matriz L
+            matriz[linha][i] = num / den
+
     
 # Função auxiliar para geração de uma lista de zeros de tamamho N
 def newLine(n):
@@ -111,3 +128,10 @@ def truncate(m,n):
         for j in range(len(m[i])):
             m[i][j] = round(m[i][j],n)
     return m            
+
+# Função auxiliar para trocar elementos de um vetor
+def swap(m, i, j):
+    aux = m[i]
+    m[i] = m[j]
+    m[j] = aux
+    return m
