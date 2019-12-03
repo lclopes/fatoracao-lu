@@ -129,7 +129,7 @@ def truncate(m,n):
             m[i][j] = round(m[i][j],n)
     return m            
 
-# Função auxiliar para trocar elementos de um vetor
+# Função auxiliar para trocar elementos de um vetor (não usada)
 def swap(m, i, j):
     aux = m[i]
     m[i] = m[j]
