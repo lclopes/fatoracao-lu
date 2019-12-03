@@ -67,7 +67,7 @@ detA = detTriang(L) * detTriang(U) * P
 print("\ndet(A) = "+str(detA))
 addLogEntry("\ndet(A) = "+str(detA)) # Log
 
-inv = invLU(L, U, b[0])
+inv = invLU(L, U)
 print("\nInversa da matriz A:")
 printM(inv)
 

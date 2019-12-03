@@ -56,5 +56,33 @@ def multiplyM(a, b):
                 c[i][j] = c[i][j] + a[i][k] * b[k][j]
     return c
 
-def invLU(L, U, b):
-    pass
+# Transpõe matriz
+def transpose(m):
+    return [[m[j][i] for j in range(len(m))] for i in range(len(m[0]))] 
+
+# Calcula inversa de A (seja A=LU)
+def invLU(L, U):
+    id = []
+    for i in range(len(L)):
+        id.append([0]*len(L))
+        id[i][i] = 1
+    
+    inv = []
+    for row in id:
+        y = forw(L, row)
+        x = back(U, y)
+        inv.append(x)
+        
+    inv = transpose(inv)
+    return inv
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
