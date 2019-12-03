@@ -20,7 +20,7 @@ def saveLog(filename):
 	print("Log foi salvo.")
 
 # Lê arquivo de entrada
-f = open("SISTEMA", "r")
+f = open("TESTE", "r")
 lines = f.readlines()
 f.close()
 
@@ -37,39 +37,41 @@ for i in range(n+3, n+3+m):
 	b = list(map(int, lines[i].split()))
 	b_list.append(b)
 
-#print(A, b_list, n, m)
+print(A, b_list, n, m)
 
-#caso de teste: Exercício 2 da lista de resolução de sistemas lineares
-testA = [[6.0, 7.0, 4.0],
-         [4.0, 4.0, 3.0],
-         [2.0, 1.0, 1.0]]
-    
-#caso de teste: Exercício 11 da lista de resolução de sistemas lineares
-testB = [3.0, 6.0, -16.0, 18.0]
+decompositionLU(A, b_list)
 
-testC = [[3.0, 2.0, 0.0, 1.0],
-         [9.0, 8.0, -3.0, 4.0],
-         [-6.0, 4.0, -8.0, 0.0],
-         [3.0, -8.0, 3.0, -4.0]]
+##caso de teste: Exercício 2 da lista de resolução de sistemas lineares
+#testA = [[6.0, 7.0, 4.0],
+#         [4.0, 4.0, 3.0],
+#         [2.0, 1.0, 1.0]]
+#    
+##caso de teste: Exercício 11 da lista de resolução de sistemas lineares
+#testB = [3.0, 6.0, -16.0, 18.0]
+#
+#testC = [[3.0, 2.0, 0.0, 1.0],
+#         [9.0, 8.0, -3.0, 4.0],
+#         [-6.0, 4.0, -8.0, 0.0],
+#         [3.0, -8.0, 3.0, -4.0]]
+#
+#testD = [
+#    [2, 1, 1, 0],
+#    [4, 3, 3, 1],
+#    [8, 7, 9, 5],
+#    [6, 7, 9, 8]
+#]
 
-testD = [
-    [2, 1, 1, 0],
-    [4, 3, 3, 1],
-    [8, 7, 9, 5],
-    [6, 7, 9, 8]
-]
+#decompositionLU(testD,testB)
 
-decompositionLU(testD,testB)
-
-mA = [
-    [3, 1],
-    [2, -1],
-    [0, 4]
-]
-
-mB = [
-    [1, -1, 2],
-    [3, 0, 5]
-]
+#mA = [
+#    [3, 1],
+#    [2, -1],
+#    [0, 4]
+#]
+#
+#mB = [
+#    [1, -1, 2],
+#    [3, 0, 5]
+#]
 
 # printM(multiplyM(mA, mB))

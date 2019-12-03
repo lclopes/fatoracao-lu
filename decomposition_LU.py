@@ -61,13 +61,13 @@ def decompositionLU(a,b):
         # Realiza pivoteamento parcial              
         partialPivoting(U,k)
 
-    # Gera a matriz L (MODIFICAR)
-    for coluna in range(0, len(U)):
-        for linha in range(coluna+1, len(U)):
-            L[linha][coluna] = U[linha][coluna] # Matriz L
-            U[linha][coluna] = 0     
-
-    # return U, L, b, permut, cont           
+    # Popula matriz L
+    for col in range(len(U)):
+        for row in range(col+1, len(U)):
+            mij = U[row][col]
+            L[row][col] = mij
+            U[row][col] = 0
+         
     # Resultados
     print("Matriz L:") 
     L = truncate(L,2)
@@ -100,14 +100,14 @@ def partialPivoting(matriz, i):
     if(i != len(matriz)-1):
         den = matriz[i][i]
 
-        for linha in range(i+1, N):
-            num = matriz[linha][i]
+        for row in range(i+1, N):
+            num = matriz[row][i]
 
-            for coluna in range(i, N):
-                matriz[linha][coluna] -= (num / den) * matriz[i][coluna]
+            for col in range(i, N):
+                matriz[row][col] -= (num / den) * matriz[i][col]
 
             # Constrói a matriz L
-            matriz[linha][i] = num / den
+            matriz[row][i] = num / den
 
     
 # Função auxiliar para geração de uma lista de zeros de tamamho N
